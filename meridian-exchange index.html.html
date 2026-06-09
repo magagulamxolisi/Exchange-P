@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placeholder— Russia · South Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --cream: #f5f0e8;
+    --gold: #c9564c;
+    --gold-light: #e8d5a0;
+    --teal: #23007a;
+    --teal-light: #d4ede7;
+    --shared-red: #de3831;
+    --shared-blue: #002395;
+    --muted: #6b6456;
+    --border: rgba(14,14,14,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  nav.scrolled { padding: 12px 48px; }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; letter-spacing: 0.02em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 14px;
+    font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream) !important;
+    padding: 8px 20px; border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--shared-blue) !important; color: #fff !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid; place-items: center;
+    position: relative; overflow: hidden;
+    padding: 120px 48px 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(222,56,49,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 10% 80%, rgba(0,35,149,0.10) 0%, transparent 60%),
+      var(--cream);
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(14,14,14,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,14,14,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; text-align: center; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 32px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+  }
+  .flag-pair { display: inline-flex; gap: 8px; align-items: center; }
+  .flag-svg {
+    width: 28px; height: 18px; border-radius: 2px; overflow: hidden;
+    display: inline-block; vertical-align: middle;
+    box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 900; line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  h1 em { font-style: italic; color: var(--shared-blue); display: block; }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--muted); font-weight: 300;
+    max-width: 600px; margin: 24px auto 48px;
+    line-height: 1.6;
+  }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    padding: 14px 32px; border-radius: 2px;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--shared-blue); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--ink); color: var(--ink);
+    padding: 14px 32px; border-radius: 2px;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--ink); color: var(--cream);
+    padding: 28px 48px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    padding: 12px 32px; border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700; color: var(--shared-red);
+    display: block; line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; color: rgba(245,240,232,0.6);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 48px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--shared-red); margin-bottom: 16px; display: block;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  h2 em { font-style: italic; color: var(--shared-blue); }
+  .section-intro {
+    font-size: 18px; color: var(--muted); font-weight: 300;
+    max-width: 600px; line-height: 1.7; margin-bottom: 64px;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: rgb(198, 185, 185); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-visual { position: relative; aspect-ratio: 4/5; }
+  .about-card {
+    position: absolute; background: var(--cream);
+    border: 1px solid var(--border); padding: 32px; border-radius: 4px;
+  }
+  .about-card-main {
+    inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+    background: linear-gradient(160deg, #002395 0%, #0a1a4a 100%);
+    color: white; padding: 40px;
+  }
+  .about-card-main .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px; color: var(--gold); line-height: 0.8;
+    margin-bottom: 16px; opacity: 0.6;
+  }
+  .about-card-main blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-style: italic; line-height: 1.5;
+    color: rgba(245,240,232,0.9);
+  }
+  .about-card-float {
+    bottom: -24px; right: -24px; width: 200px; z-index: 2;
+    background: var(--gold); border: none; color: var(--ink);
+  }
+  .about-card-float .stat-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 900; line-height: 1;
+  }
+  .about-card-float p { font-size: 13px; color: rgba(14,14,14,0.7); margin-top: 4px; }
+  .about-text h2 { margin-bottom: 20px; }
+  .about-text p { color: var(--muted); margin-bottom: 20px; font-size: 16px; }
+  .values-list { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .values-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: var(--ink); }
+  .value-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--shared-red); flex-shrink: 0; margin-top: 8px;
+  }
+
+  /* ── PROGRAMME ── */
+  #programme { background: var(--cream); }
+  .programme-split { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start; }
+  .programme-sticky { position: sticky; top: 100px; }
+  .format-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .format-card {
+    background: white; border: 1px solid var(--border);
+    padding: 20px 24px; border-radius: 4px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .format-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(0,35,149,0.08); color: var(--shared-blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .format-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .format-card p { font-size: 13px; color: var(--muted); }
+
+  .sessions-list { display: flex; flex-direction: column; gap: 0; }
+  .session-item {
+    display: grid; grid-template-columns: 48px 1fr;
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0; transition: all 0.2s; cursor: default;
+  }
+  .session-item:first-child { border-top: 1px solid var(--border); }
+  .session-item:hover { background: rgba(255,255,255,0.5); padding-left: 12px; }
+  .session-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; color: var(--shared-red); font-weight: 700; padding-top: 3px;
+  }
+  .session-body h4 { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  .session-body p { font-size: 14px; color: var(--muted); font-style: italic; }
+  .session-tag {
+    display: inline-block; margin-top: 8px;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px; font-weight: 500;
+  }
+  .tag-prof     { background: #e6f1fb; color: #185fa5; }
+  .tag-social   { background: var(--teal-light); color: var(--teal); }
+  .tag-identity { background: #faeeda; color: #633806; }
+
+  /* ── WHY JOIN ── */
+  #why { background: var(--ink); color: var(--cream); }
+  #why .section-tag { color: var(--gold); }
+  #why h2 { color: var(--cream); }
+  #why .section-intro { color: rgba(245,240,232,0.6); }
+  .reasons-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(255,255,255,0.08); margin-top: 64px;
+  }
+  .reason {
+    background: var(--ink); padding: 48px 40px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.3s;
+  }
+  .reason:last-child { border-right: none; }
+  .reason:hover { background: #1a1a1a; }
+  .reason-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px; font-weight: 900; color: rgba(201,168,76,0.2);
+    line-height: 1; margin-bottom: 24px;
+  }
+  .reason h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--cream);
+  }
+  .reason p { font-size: 14px; color: rgba(245,240,232,0.55); line-height: 1.7; }
+
+  /* ── COUNTRIES ── */
+  #countries { background: white; }
+  .countries-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .country-card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .country-header { padding: 32px 32px 24px; position: relative; }
+  .country-card:first-child .country-header { background: linear-gradient(135deg, #1a2540, #0d1829); }
+  .country-card:last-child  .country-header { background: linear-gradient(135deg, #1a3a20, #0d2214); }
+  .country-flag-big { position: absolute; right: 24px; top: 24px; font-size: 48px; opacity: 0.5; }
+  .country-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: white; margin-bottom: 6px;
+  }
+  .country-subtitle { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  .country-body { padding: 28px 32px; }
+  .country-facts { display: flex; flex-direction: column; gap: 12px; }
+  .country-fact { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--muted); }
+  .fact-label { font-weight: 500; color: var(--ink); min-width: 100px; flex-shrink: 0; }
+  .country-divider {
+    display: flex; align-items: center; justify-content: center;
+    grid-column: 1 / -1; gap: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--muted); font-style: italic;
+  }
+  .country-divider::before, .country-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── APPLY ── */
+  #apply {
+    background: linear-gradient(160deg, #002395, #0a1438);
+    color: var(--cream); text-align: center;
+  }
+  #apply .section-inner { max-width: 700px; }
+  #apply .section-tag { color: var(--gold); }
+  #apply h2 { color: var(--cream); margin-bottom: 20px; }
+  #apply > .section-inner > p { color: rgba(245,240,232,0.65); font-size: 17px; margin-bottom: 48px; }
+  .apply-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; text-align: left; }
+  .apply-item {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px; padding: 20px 24px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .apply-check { color: #ffb612; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .apply-item p { margin: 0; font-size: 14px; color: rgba(245,240,232,0.7); }
+  .apply-item strong { display: block; font-size: 15px; color: var(--cream); margin-bottom: 3px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold); color: var(--ink);
+    padding: 16px 40px; border-radius: 2px;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1.5px solid rgba(255,255,255,0.3); color: var(--cream);
+    padding: 16px 40px; border-radius: 2px;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--cream); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(245,240,232,0.5);
+    padding: 48px; font-size: 13px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  footer a { color: rgba(245,240,232,0.4); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 72px 24px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; padding: 24px; }
+    .about-grid, .programme-split, .countries-grid { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .reasons-grid { grid-template-columns: 1fr; }
+    .apply-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    #hero { padding: 100px 24px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Meridian<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programme">Programme</a></li>
+    <li><a href="#why">Why Join</a></li>
+    <li><a href="#countries">The Countries</a></li>
+    <li><a href="#apply" class="nav-cta">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="flag-pair">
+
+        <!-- Russian flag -->
+        <img class="flag-svg" 
+        src="images/russia-flag.png.webp"
+        alt="Russia"
+      <!-- South African flag -->
+        <img class="flag-svg" 
+        src="images/south-africa-flag.png.png" 
+        alt="South Africa">
+
+      </div>
+      Russia · South Africa Young Professionals Exchange
+    </div>
+
+    <h1>
+      placeholder for now, but imagine something like:
+
+    </h1>
+
+    <p class="hero-subtitle">
+      Where two worlds meet. An online programme connecting ambitious young professionals
+      from Russia and South Africa to think bigger, challenge assumptions, and build lasting global networks.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#apply" class="btn-primary">Apply to the pilot cohort</a>
+      <a href="#about"  class="btn-outline">Learn more</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-number">4</span>
+    <div class="stat-label">Sessions per cohort</div>
+  </div>
+  <div class="stat">
+    <span class="stat-number">2</span>
+    <div class="stat-label">Months duration</div>
+  </div>
+  <div class="stat">
+    <span class="stat-number">1hr</span>
+    <div class="stat-label">Time zone difference</div>
+  </div>
+  <div class="stat">
+    <span class="stat-number">Free</span>
+    <div class="stat-label">To participate</div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+
+      <div class="about-visual">
+        <div class="about-card about-card-main">
+          <div class="big-quote">"</div>
+          <blockquote>The most powerful education is not found in classrooms — it is found in genuine conversations with people who see the world differently.</blockquote>
+        </div>
+        <div class="about-card about-card-float">
+          <div class="stat-big">2</div>
+          <p>nations, one shared ambition</p>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <span class="section-tag">About the Programme</span>
+        <h2>Built to challenge <em>how you think</em></h2>
+        <p>Meridian Exchange is a structured, peer-to-peer dialogue programme for young professionals aged 22–35. Once a month, a cohort of South African and Russian participants gather online to discuss everything from leadership and entrepreneurship to identity, politics, and culture.</p>
+        <p>The goal is not to reach agreement. It is to expand the frame — to help South African young professionals in particular develop a genuinely global perspective, shaped not by headlines but by direct human conversation.</p>
+        <ul class="values-list">
+          <li><div class="value-dot"></div><span><strong>Peer-to-peer:</strong> no lecturers, no one-directional learning — equals in dialogue.</span></li>
+          <li><div class="value-dot"></div><span><strong>Deliberately diverse topics:</strong> professional and social themes, mixed intentionally.</span></li>
+          <li><div class="value-dot"></div><span><strong>Fully virtual:</strong> no visa barriers, no travel costs, no gatekeeping.</span></li>
+          <li><div class="value-dot"></div><span><strong>Norm-challenging by design:</strong> sessions are structured to surface and question assumptions.</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROGRAMME ── -->
+<section id="programme">
+  <div class="section-inner">
+    <div class="programme-split">
+
+      <div class="programme-sticky reveal">
+        <span class="section-tag">Programme Structure</span>
+        <h2>What a cohort <em>looks like</em></h2>
+        <p style="font-size:15px; color:var(--muted); margin-bottom:24px;">
+          Each cohort runs for 6 months, one session per month, 75–90 minutes each.
+        </p>
+        <div class="format-cards">
+          <div class="format-card">
+            <div class="format-icon">◎</div>
+            <div><h4>Opening check-in</h4><p>10 min — grounding and framing</p></div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon">◈</div>
+            <div><h4>Featured topic</h4><p>30 min — dual-perspective presentation</p></div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon">◉</div>
+            <div><h4>Open discussion</h4><p>30 min — structured, assumption-challenging dialogue</p></div>
+          </div>
+          <div class="format-card">
+            <div class="format-icon">◍</div>
+            <div><h4>Peer networking</h4><p>15 min — breakout rooms for deeper connection</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sessions-list reveal reveal-delay-1">
+        <div class="session-item">
+          <div class="session-num">01</div>
+          <div class="session-body">
+            <h4>Introductions &amp; first impressions</h4>
+            <p>What do we assume about each other — and why?</p>
+            <span class="session-tag tag-identity">Identity</span>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">02</div>
+          <div class="session-body">
+            <h4>Careers &amp; ambition</h4>
+            <p>How does culture shape what "success" means?</p>
+            <span class="session-tag tag-prof">Professional</span>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">03</div>
+          <div class="session-body">
+            <h4>Entrepreneurship &amp; leadership</h4>
+            <p>What does it take to build and lead in our countries?</p>
+            <span class="session-tag tag-prof">Professional</span>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">04</div>
+          <div class="session-body">
+            <h4>Social issues</h4>
+            <p>What problems keep you up at night in your country?</p>
+            <span class="session-tag tag-social">Social</span>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">05</div>
+          <div class="session-body">
+            <h4>Identity &amp; belonging</h4>
+            <p>How much of who you are is shaped by where you're from?</p>
+            <span class="session-tag tag-identity">Identity</span>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-num">06</div>
+          <div class="session-body">
+            <h4>Closing: what changed?</h4>
+            <p>What belief did this programme challenge for you?</p>
+            <span class="session-tag tag-identity">Identity</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY JOIN ── -->
+<section id="why">
+  <div class="section-inner">
+    <span class="section-tag">Why Join</span>
+    <h2>Three reasons this <em>matters</em></h2>
+    <p class="section-intro">We are not building a networking event. We are building a long-term shift in how a generation of professionals see the world.</p>
+    <div class="reasons-grid">
+      <div class="reason reveal">
+        <div class="reason-number">01</div>
+        <h3>Think globally, genuinely</h3>
+        <p>Most international exposure for South African professionals is limited to Western contexts. Meridian Exchange deliberately opens a different window — one that is equally valuable, and far less travelled.</p>
+      </div>
+      <div class="reason reveal reveal-delay-1">
+        <div class="reason-number">02</div>
+        <h3>Build a peer network that lasts</h3>
+        <p>Six months of regular contact builds something fundamentally different from a one-off conference. Participants leave with real relationships — people they can call, collaborate with, and learn from for years.</p>
+      </div>
+      <div class="reason reveal reveal-delay-2">
+        <div class="reason-number">03</div>
+        <h3>Be challenged in ways that matter</h3>
+        <p>Sessions are explicitly designed to surface and question assumptions — about leadership, success, identity, and how the world works. Comfortable conversations don't change how you think. These will.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COUNTRIES ── -->
+<section id="countries">
+  <div class="section-inner">
+    <span class="section-tag">The Exchange</span>
+    <h2>Two nations, <em>one conversation</em></h2>
+    <p class="section-intro">Russia and South Africa share more than most people realise — and differ in ways that make the conversation genuinely illuminating.</p>
+    <div class="countries-grid">
+      <div class="country-card reveal">
+        <div class="country-header">
+          <div class="russian-flag.png">🇷🇺</div>
+          <div class="country-name">Russia</div>
+          <div class="country-subtitle">UTC +3 · Moscow</div>
+        </div>
+        <div class="country-body">
+          <div class="country-facts">
+            <div class="country-fact"><span class="fact-label">Population</span><span>144 million</span></div>
+          
+            <div class="country-fact"><span class="fact-label">Key sectors</span><span>Energy, technology, manufacturing, defence</span></div>
+            <div class="country-fact"><span class="fact-label">Young professionals</span><span>Highly educated, internationally curious, navigating rapid change</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="country-card reveal reveal-delay-1">
+        <div class="country-header">
+          <div class="country-flag-big">🇿🇦</div>
+          <div class="country-name">South Africa</div>
+          <div class="country-subtitle">UTC +2 · Johannesburg</div>
+        </div>
+        <div class="country-body">
+          <div class="country-facts">
+            <div class="country-fact"><span class="fact-label">Population</span><span>60 million</span></div>
+            
+            <div class="country-fact"><span class="fact-label">Key sectors</span><span>Finance, mining, tech, creative industries</span></div>
+            <div class="country-fact"><span class="fact-label">Young professionals</span><span>Ambitious, pan-African in outlook, hungry for global perspective</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="country-divider reveal">Only 1 hour separates Moscow from Johannesburg</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPLY ── -->
+<section id="apply">
+  <div class="section-inner">
+    <span class="section-tag">Join the Pilot</span>
+    <h2>Applications are <em>open</em></h2>
+    <p>We are recruiting our founding cohort of 5–10 participants from both countries. This is a rare opportunity to shape the programme from the inside.</p>
+    <div class="apply-grid">
+      <div class="apply-item reveal">
+        <div class="apply-check">◆</div>
+        <div><strong>Age all ages are welcome</strong><p>Currently employed or recently graduated, in any sector.</p></div>
+      </div>
+      <div class="apply-item reveal reveal-delay-1">
+        <div class="apply-check">◆</div>
+        <div><strong>Genuinely curious</strong><p>About the world beyond your own country and professional context.</p></div>
+      </div>
+      <div class="apply-item reveal reveal-delay-2">
+        <div class="apply-check">◆</div>
+        <div><strong>Committed</strong><p>Able to attend 2 sessions a month.</p></div>
+      </div>
+      <div class="apply-item reveal reveal-delay-3">
+        <div class="apply-check">◆</div>
+        <div><strong>Open to challenge</strong><p>Not just to observe, but to question what you believe.</p></div>
+      </div>
+    </div>
+    <div class="cta-buttons">
+      <a href="mailto:hello@meridianexchange.org" class="btn-gold">Express Interest</a>
+      <a href="mailto:partners@meridianexchange.org" class="btn-ghost">Partner with us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">placeholde<span>.</span></div>
+  <div>Russia · South Africa Young Professionals Exchange</div>
+  <div><a href="mailto:hello@exchange.org">hello@exchange.org</a></div>
+</footer>
+<script>
+  // Shrink nav on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Hero fade-in on load
+  window.addEventListener('load', () => {
+    const hero = document.querySelector('.hero-content');
+    hero.style.cssText = 'opacity:0; transform:translateY(24px); transition:opacity 1s ease, transform 1s ease;';
+    setTimeout(() => { hero.style.opacity = '1'; hero.style.transform = 'none'; }, 150);
+  });
+</script>
+
+</body>
+</html>
